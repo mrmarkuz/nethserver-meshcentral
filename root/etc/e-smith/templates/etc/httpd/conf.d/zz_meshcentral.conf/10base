@@ -1,0 +1,28 @@
+#
+# MeshCentral httpd conf
+#
+
+<VirtualHost *:80>
+    IncludeOptional conf.d/default-virtualhost.inc
+</VirtualHost>
+
+<VirtualHost *:80>
+   ServerName { $meshcentral{VirtualHost} || 'localhost' }
+   RedirectMatch 301 ^(?!/\.well-known/acme-challenge/).* https://{ $meshcentral{VirtualHost} || 'localhost' }
+</VirtualHost>
+
+<VirtualHost *:443>
+   ServerName { $meshcentral{VirtualHost} || 'localhost' }
+
+   SSLEngine on
+   SSLProxyEngine on
+   ProxyPreserveHost On
+
+   RewriteEngine on
+   RewriteCond %{HTTP:Upgrade} websocket [NC]
+   RewriteCond %{HTTP:Connection} upgrade [NC]
+   RewriteRule . ws://127.0.0.1:8989%{REQUEST_URI} [P]
+
+   ProxyPass / http://127.0.0.1:8989/
+   ProxyPassReverse / http://127.0.0.1:8989/
+</VirtualHost>

@@ -1,0 +1,7 @@
+#
+# nsapi_nethserver_meshcentral
+#
+Cmnd_Alias NSAPI_NETHSERVER_MESHCENTRAL = \
+    /usr/libexec/nethserver/api/nethserver-meshcentral/read
+
+Defaults!NSAPI_NETHSERVER_MESHCENTRAL !requiretty

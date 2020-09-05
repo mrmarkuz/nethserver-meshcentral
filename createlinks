@@ -1,0 +1,40 @@
+#!/usr/bin/perl
+
+use strict;
+use esmith::Build::CreateLinks qw(:all);
+
+
+#mandatory to create db after installation
+my $event = 'nethserver-zabbix-update';
+event_actions ($event,
+     'initialize-default-databases' => '00',
+     'nethserver-meshcentral-conf' => '20'
+);
+
+templates2events("/etc/httpd/conf.d/zz_meshcentral.conf", $event);
+templates2events("/opt/meshcentral/meshcentral-data/config.json", $event);
+
+
+event_services($event,
+               'rh-mongodb36-mongod' => 'restart',
+               'meshcentral' => 'restart',
+               'httpd' => 'reload'
+);
+
+
+#--------------------------------------------------
+# actions for pre-backup-data event
+#--------------------------------------------------
+
+#$event = 'pre-backup-data';
+
+#event_actions($event, 'nethserver-meshcentral-backup' => 50);
+
+#--------------------------------------------------
+# actions for post-restore-data event
+#--------------------------------------------------
+
+#$event = 'post-restore-data';
+
+#event_actions($event, 'nethserver-meshcentral-restore' => 50);
+#event_services($event, 'zabbix-server' => 'restart');

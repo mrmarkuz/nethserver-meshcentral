@@ -1,0 +1,14 @@
+\{
+  "settings": \{
+    "Cert": "ohyeah.myddns.rocks",
+    "MongoDb": "mongodb://127.0.0.1:27017",
+    "MongoDbName": "meshcentral",
+    "MongoDumpPath": "/opt/rh/rh-mongodb36/root/usr/bin/mongodump",
+    "Minify": 1,
+    "Port": 8989,
+    "AliasPort": 443,
+    "RedirPort": 81,
+    "AgentAllowedIP": { $meshcentral{'AgentAllowedIP'} }, 
+    "TlsOffload": "127.0.0.1"
+  \}
+\}

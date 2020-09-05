@@ -1,0 +1,19 @@
+{
+  "id": "nethserver-meshcentral",
+  "name": "MeshCentral",
+  "summary": "Nethserver integration of MeshCentral",
+  "description": "Provides remote monitoring and management",
+  "url": "",
+  "provides": ["nethserver-meshcentral"],
+  "release": {
+    "version": "0.0.1"
+  },
+  "author": {
+    "name": "Markus Neuberger"
+  },
+  "infoapi": {
+    "path": "nethserver-meshcentral/read"
+  },
+  "icon": "logo.png",
+  "external": true
+}

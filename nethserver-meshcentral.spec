@@ -36,6 +36,7 @@ mkdir -p /opt/meshcentral
 cd /opt/meshcentral
 scl enable rh-nodejs10 "npm update"
 scl enable rh-nodejs10 "npm install meshcentral"
+scl enable rh-nodejs10 "npm install mongodb"
 chown -R meshcentral:meshcentral /opt/meshcentral
 
 mkdir -p %{buildroot}/usr/share/cockpit/nethserver/applications/

@@ -7,12 +7,12 @@
 </VirtualHost>
 
 <VirtualHost *:80>
-   ServerName { $meshcentral{VirtualHost} || 'localhost' }
+   ServerName { $meshcentral{VirtualHost} || 'meshcentral.domain.tld' }
    RedirectMatch 301 ^(?!/\.well-known/acme-challenge/).* https://{ $meshcentral{VirtualHost} || 'localhost' }
 </VirtualHost>
 
 <VirtualHost *:443>
-   ServerName { $meshcentral{VirtualHost} || 'localhost' }
+   ServerName { $meshcentral{VirtualHost} || 'meshcentral.domain.tld' }
 
    SSLEngine on
    SSLProxyEngine on

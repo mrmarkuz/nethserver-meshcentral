@@ -1,4 +1,4 @@
-# nethserver-moodle
+# nethserver-meshcentral
 
 nethserver-meshcentral integrates MeshCentral remote monitoring and management server
 
@@ -9,7 +9,3 @@ nethserver-meshcentral integrates MeshCentral remote monitoring and management s
 https://community.nethserver.org/t/howto-install-meshcentral-on-nethserver/15331
 
 ## ToDo
-
-## Kudos
-
-Thanks to dnutan for providing perfect installation notes.

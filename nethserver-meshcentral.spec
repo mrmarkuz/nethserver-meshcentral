@@ -43,7 +43,7 @@ mkdir -p %{buildroot}/usr/share/cockpit/nethserver/applications/
 mkdir -p %{buildroot}/usr/libexec/nethserver/api/%{name}/
 mkdir -p %{buildroot}/usr/share/cockpit/%{name}/
 
-mkdir -p %{buildroot}/etc/e-smith/events/nethserver-meshcentral-update
+#mkdir -p %{buildroot}/etc/e-smith/events/nethserver-meshcentral-update
 
 cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
 cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
@@ -52,7 +52,6 @@ cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 %{genfilelist} $RPM_BUILD_ROOT \
   --file /etc/sudoers.d/50_nsapi_nethserver_meshcentral 'attr(0440,root,root)' \
   --file /usr/libexec/nethserver/api/%{name}/read 'attr(775,root,root)' \
-  --dir /opt/meshcentral 'attr(775,meshcentral,meshcentral)' \
 > %{name}-%{version}-%{release}-filelist
 # | grep -v '/opt/meshcentral/'
 #exit 0
@@ -67,8 +66,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %dir %{_nseventsdir}/%{name}-update
 %doc COPYING
-%dir /opt/meshcentral/ %attr(0755,meshcentral,meshcentral)
-%attr(755,meshcentral,meshcentral) /opt/meshcentral/*
-/etc/e-smith/events/nethserver-zabbix-update/templates2expand/opt/meshcentral/meshcentral-data/config.json
-/etc/e-smith/templates/opt/meshcentral/meshcentral-data/config.json/10base
-/etc/e-smith/templates/opt/meshcentral/meshcentral-data/config.json/template-begin

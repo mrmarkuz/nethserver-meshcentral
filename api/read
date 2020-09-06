@@ -23,7 +23,7 @@ input=$(cat)
 action=$(jq -r .action <<<"$input")
 
 if [[ $action == "app-info" ]]; then
-    if [[ $(/sbin/e-smith/config getprop zammad status) == "enabled" ]]; then
+    if [[ $(/sbin/e-smith/config getprop meshcentral status) == "enabled" ]]; then
         vhost=$(/sbin/e-smith/config getprop meshcentral VirtualHost)
         printf '{"url":"%s"}' "https://${vhost}"
     else

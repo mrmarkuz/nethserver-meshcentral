@@ -8,7 +8,7 @@
     "Port": 8989,
     "AliasPort": 443,
     "RedirPort": 81,
-    "AgentAllowedIP": { $meshcentral{'AgentAllowedIP'} }, 
+    "AgentAllowedIP": "{ $meshcentral{'AgentAllowedIP'} }", 
     "TlsOffload": "127.0.0.1"
   \}
 \}

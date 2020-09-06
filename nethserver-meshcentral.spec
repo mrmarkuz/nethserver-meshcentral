@@ -42,6 +42,7 @@ rm -f %{name}-%{version}-%{release}-filelist
 mkdir -p %{buildroot}/usr/share/cockpit/nethserver/applications/
 mkdir -p %{buildroot}/usr/libexec/nethserver/api/%{name}/
 mkdir -p %{buildroot}/usr/share/cockpit/%{name}/
+mkdir -p %{buildroot}/opt/meshcentral/meshcentral-data
 
 #mkdir -p %{buildroot}/etc/e-smith/events/nethserver-meshcentral-update
 
@@ -52,6 +53,7 @@ cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 %{genfilelist} $RPM_BUILD_ROOT \
   --file /etc/sudoers.d/50_nsapi_nethserver_meshcentral 'attr(0440,root,root)' \
   --file /usr/libexec/nethserver/api/%{name}/read 'attr(775,root,root)' \
+  --dir /opt/meshcentral/meshcentral-data 'attr(775,meshcentral,meshcentral)' \
 > %{name}-%{version}-%{release}-filelist
 # | grep -v '/opt/meshcentral/'
 #exit 0

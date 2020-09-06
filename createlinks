@@ -5,7 +5,7 @@ use esmith::Build::CreateLinks qw(:all);
 
 
 #mandatory to create db after installation
-my $event = 'nethserver-zabbix-update';
+my $event = 'nethserver-meshcentral-update';
 event_actions ($event,
      'initialize-default-databases' => '00',
      'nethserver-meshcentral-conf' => '20'

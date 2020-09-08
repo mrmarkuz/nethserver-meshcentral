@@ -1,14 +1,15 @@
 \{
   "settings": \{
-    "{$meshcentral{WanMode} eq "enabled" ? '' : '_';}Cert": "{ $meshcentral{VirtualHost} }",
+    "Cert": "{ $meshcentral{VirtualHost} }",
     "MongoDb": "mongodb://127.0.0.1:27017",
     "MongoDbName": "meshcentral",
     "MongoDumpPath": "/opt/rh/rh-mongodb36/root/usr/bin/mongodump",
+    "WANonly": true,
     "Minify": 1,
     "Port": 8989,
     "AliasPort": 443,
-    "RedirPort": 81,
-    "AgentAllowedIP": "{$meshcentral{'AgentAllowedIP'}}",
+    "{{$meshcentral{'UserAllowedIP'} ? '' : '_'; }UserAllowedIP": "{$meshcentral{'UserAllowedIP'}}",
+    "{{$meshcentral{'AgentAllowedIP'} ? '' : '_'; }AgentAllowedIP": "{$meshcentral{'AgentAllowedIP'}}",
     "TlsOffload": "127.0.0.1"
   \}
 \}

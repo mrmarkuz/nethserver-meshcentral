@@ -8,8 +8,23 @@
     "Minify": 1,
     "Port": 8989,
     "AliasPort": 443,
-    "{{$meshcentral{'UserAllowedIP'} ? '' : '_'; }UserAllowedIP": "{$meshcentral{'UserAllowedIP'}}",
-    "{{$meshcentral{'AgentAllowedIP'} ? '' : '_'; }AgentAllowedIP": "{$meshcentral{'AgentAllowedIP'}}",
+    "RedirPort": 0,
+    "{ $meshcentral{'UserAllowedIP'} ? '' : '_'; }UserAllowedIP": "{ $meshcentral{'UserAllowedIP'} }",
+    "{ $meshcentral{'AgentAllowedIP'} ? '' : '_'; }AgentAllowedIP": "{ $meshcentral{'AgentAllowedIP'} }",
     "TlsOffload": "127.0.0.1"
+  \},
+  "domains": \{
+    "": \{
+      "{ $meshcentral{'Title'} ? '' : '_'; }title": "{ $meshcentral{'Title'} }",
+      "{ $meshcentral{'Title2'} ? '' : '_'; }title2": "{ $meshcentral{'Title2'} }",
+      "{ $meshcentral{'TitlePicture'} ? '' : '_'; }titlePicture": "{ $meshcentral{'TitlePicture'} }",
+      "{ $meshcentral{'LoginPicture'} ? '' : '_'; }loginPicture": "{ $meshcentral{'LoginPicture'} }"
+    \}
+  \},
+  "{ ($meshcentral{'MailValidation'} eq 'enabled') ? '' : '_'; }smtp": \{
+    "host": "{ $meshcentral{'MailHost'} || 'localhost'; }",
+    "port": { $meshcentral{'MailPort'} || '25' },
+    "from": "{ $meshcentral{'MailFrom'} || 'meshcentral@' . $SystemName . '.' . $DomainName }",
+    "{ ($meshcentral{'MailTLS'} eq 'enabled') ? '' : '_'; }tls": true
   \}
 \}

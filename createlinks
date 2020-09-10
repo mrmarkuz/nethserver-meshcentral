@@ -21,20 +21,35 @@ event_services($event,
                'httpd' => 'reload'
 );
 
+# nethserver-meshcentral-upgrade
+
+event_actions("nethserver-meshcentral-upgrade, 'nethserver-meshcentral-upgrade' => 50);
+
+event_services("nethserver-meshcentral-upgrade",
+               'rh-mongodb36-mongod' => 'restart',
+               'meshcentral' => 'restart',
+               'httpd' => 'reload'
+);
+
+# Certificate-update event
+
+#event_actions('certificate-update', qw(
+#    nethserver-meshcentral-conf 50
+#));
 
 #--------------------------------------------------
 # actions for pre-backup-data event
 #--------------------------------------------------
 
-#$event = 'pre-backup-data';
+$event = 'pre-backup-data';
 
-#event_actions($event, 'nethserver-meshcentral-backup' => 50);
+event_actions($event, 'nethserver-meshcentral-backup' => 50);
 
 #--------------------------------------------------
 # actions for post-restore-data event
 #--------------------------------------------------
 
-#$event = 'post-restore-data';
+$event = 'post-restore-data';
 
-#event_actions($event, 'nethserver-meshcentral-restore' => 50);
-#event_services($event, 'zabbix-server' => 'restart');
+event_actions($event, 'nethserver-meshcentral-restore' => 50);
+event_services($event, 'meshcentral' => 'restart');

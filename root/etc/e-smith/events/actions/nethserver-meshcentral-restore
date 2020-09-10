@@ -1,2 +1,7 @@
 #!/bin/bash
 
+# drop database if exists
+[ $(scl enable rh-mongodb36 "mongo --eval 'db.getMongo().getDBNames().indexOf(\"meshcentral\")' --quiet meshcentral") -gt 0 ] && scl enable rh-mongodb36 "mongo --eval 'db.dropDatabase();' meshcentral"
+
+# restore database
+/opt/rh/rh-mongodb36/root/usr/bin/mongorestore --archive=/var/lib/nethserver/meshcentral/backup/backup.archive

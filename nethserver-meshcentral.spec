@@ -32,19 +32,12 @@ rm -rf $RPM_BUILD_ROOT
 (cd root; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
 rm -f %{name}-%{version}-%{release}-filelist
 
-#mkdir -p %{buildroot}/opt/meshcentral
-#cd %{buildroot}/opt/meshcentral
-#scl enable rh-nodejs10 "npm update"
-#scl enable rh-nodejs10 "npm install meshcentral"
-#scl enable rh-nodejs10 "npm install mongodb"
-#chown -R meshcentral:meshcentral %{buildroot}/opt/meshcentral
 
 mkdir -p %{buildroot}/usr/share/cockpit/nethserver/applications/
 mkdir -p %{buildroot}/usr/libexec/nethserver/api/%{name}/
 mkdir -p %{buildroot}/usr/share/cockpit/%{name}/
 mkdir -p %{buildroot}/opt/meshcentral/meshcentral-data
-
-#mkdir -p %{buildroot}/etc/e-smith/events/nethserver-meshcentral-update
+mkdir -p %{buildroot}/var/lib/nethserver/meshcentral/backup/
 
 cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
 cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/

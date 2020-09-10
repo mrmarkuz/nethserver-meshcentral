@@ -25,6 +25,10 @@ cd /opt/meshcentral
 scl enable rh-nodejs10 "npm install meshcentral"
 sudo -u meshcentral scl enable rh-nodejs10 "timeout 15 node ./node_modules/meshcentral"
 
+# Copy letsencrypt cert to Meshcentral
+\cp /etc/pki/tls/certs/localhost.crt /opt/meshcentral/meshcentral-data/webserver-cert-public.crt
+\cp /etc/pki/tls/private/localhost.key /opt/meshcentral/meshcentral-data/webserver-cert-private.key
+
 # Set meshcentral owns /opt/meshcentral after install for security
 chown -R meshcentral:meshcentral /opt/meshcentral
 

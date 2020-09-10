@@ -23,9 +23,9 @@ event_services($event,
 
 # nethserver-meshcentral-upgrade
 
-event_actions("nethserver-meshcentral-upgrade, 'nethserver-meshcentral-upgrade' => 50);
+event_actions('nethserver-meshcentral-upgrade', 'nethserver-meshcentral-upgrade' => 50);
 
-event_services("nethserver-meshcentral-upgrade",
+event_services('nethserver-meshcentral-upgrade',
                'rh-mongodb36-mongod' => 'restart',
                'meshcentral' => 'restart',
                'httpd' => 'reload'

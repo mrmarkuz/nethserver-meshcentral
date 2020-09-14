@@ -4,7 +4,7 @@
     "MongoDb": "mongodb://127.0.0.1:27017",
     "MongoDbName": "meshcentral",
     "MongoDumpPath": "/opt/rh/rh-mongodb36/root/usr/bin/mongodump",
-    "WANonly": true,
+    "_WANonly": true,
     "Minify": 1,
     "Port": 8989,
     "AliasPort": 443,
@@ -15,10 +15,59 @@
   \},
   "domains": \{
     "": \{
+      "CertUrl": "{ $meshcentral{VirtualHost} }",
       "{ $meshcentral{'Title'} ? '' : '_'; }title": "{ $meshcentral{'Title'} }",
       "{ $meshcentral{'Title2'} ? '' : '_'; }title2": "{ $meshcentral{'Title2'} }",
       "{ $meshcentral{'TitlePicture'} ? '' : '_'; }titlePicture": "{ $meshcentral{'TitlePicture'} }",
-      "{ $meshcentral{'LoginPicture'} ? '' : '_'; }loginPicture": "{ $meshcentral{'LoginPicture'} }"
+      "{ $meshcentral{'LoginPicture'} ? '' : '_'; }loginPicture": "{ $meshcentral{'LoginPicture'} }",
+      "{ ($meshcentral{'ldap'} eq 'enabled') ? '' : '_'; }auth": "ldap",
+{
+  use NethServer::SSSD;
+  our $sssd = new NethServer::SSSD();
+  our $host = $sssd->host();
+  our $ldapURI = $sssd->ldapURI();
+  our $port = $sssd->port();
+  our $usetls = 'false';
+  our $bindDN = $sssd->bindDN();
+  our $bindPass = $sssd->bindPassword();
+  our $userDN = $sssd->userDN();
+  our $quotedBindPass = $bindPass; $quotedBindPass =~ s/\'/\\'/g;
+  if($sssd->startTls()) {
+      $usetls = 'true';
+  }
+  if ($sssd->isLdap()) {
+  $OUT .= <<EOL;
+      "ldapUserName": "uid",
+      "ldapUserRealName": "cn",
+      "ldapUserKey": "uid",
+      "ldapUserEmail": "Email",
+      "ldapOptions": \{
+        "url": "$ldapURI:$port",
+        "bindDN": "$bindDN",
+        "bindCredentials": "$bindPass",
+        "searchBase": "$userDN",
+        "searchFilter": "(uid={{username}})",
+        "strictDN": false
+EOL
+  }
+  if ($sssd->isAD()) {
+  $OUT .= <<EOL;
+      "ldapUserName": "cn",
+      "ldapUserRealName": "displayName",
+      "ldapUserKey": "cn",
+      "ldapUserBinaryKey": "objectSid",
+      "ldapUserEmail": "userPrincipalName",
+      "ldapOptions": \{
+        "url": "$ldapURI:$port",
+        "bindDN": "$bindDN",
+        "bindCredentials": "$bindPass",
+        "searchBase": "$userDN",
+        "searchFilter": "(sAMAccountName={{username}})",
+        "strictDN": false
+EOL
+  }
+}
+      \}
     \}
   \},
   "{ ($meshcentral{'MailValidation'} eq 'enabled') ? '' : '_'; }smtp": \{

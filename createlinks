@@ -33,9 +33,9 @@ event_services('nethserver-meshcentral-upgrade',
 
 # Certificate-update event
 
-event_actions('certificate-update', qw(
-    nethserver-meshcentral-upgrade 50
-));
+#event_actions('certificate-update', qw(
+#    nethserver-meshcentral-upgrade 50
+#));
 
 #--------------------------------------------------
 # actions for pre-backup-data event

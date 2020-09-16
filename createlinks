@@ -53,3 +53,12 @@ $event = 'post-restore-data';
 
 event_actions($event, 'nethserver-meshcentral-restore' => 50);
 event_services($event, 'meshcentral' => 'restart');
+
+#--------------------------------------------------
+# actions for nethserver-sssd-save event
+#--------------------------------------------------
+
+$event = "nethserver-sssd-save";
+
+templates2events("/opt/meshcentral/meshcentral-data/config.json", $event);
+event_services($event, 'meshcentral' => 'restart');
